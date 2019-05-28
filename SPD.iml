@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<module type="JAVA_MODULE" version="4">
+  <component name="NewModuleRootManager" inherit-compiler-output="true">
+    <exclude-output />
+    <content url="file://$MODULE_DIR$">
+      <sourceFolder url="file://$MODULE_DIR$/src" isTestSource="false" />
+    </content>
+    <orderEntry type="inheritedJdk" />
+    <orderEntry type="sourceFolder" forTests="false" />
+    <orderEntry type="module-library">
+      <library>
+        <CLASSES>
+          <root url="jar://E:/MinecraftServer/spigot-1.13.2.jar!/" />
+        </CLASSES>
+        <JAVADOC />
+        <SOURCES>
+          <root url="jar://E:/MinecraftServer/spigot-1.13.2.jar!/" />
+        </SOURCES>
+      </library>
+    </orderEntry>
+    <orderEntry type="module-library">
+      <library>
+        <CLASSES>
+          <root url="jar://$USER_HOME$/Downloads/WorldEdit-master.zip!/" />
+        </CLASSES>
+        <JAVADOC />
+        <SOURCES>
+          <root url="jar://$USER_HOME$/Downloads/WorldEdit-master.zip!/WorldEdit-master/worldedit-bukkit/src/main/java" />
+          <root url="jar://$USER_HOME$/Downloads/WorldEdit-master.zip!/WorldEdit-master/worldedit-bukkit/src/test/java" />
+          <root url="jar://$USER_HOME$/Downloads/WorldEdit-master.zip!/WorldEdit-master/worldedit-core/src/legacy/java" />
+          <root url="jar://$USER_HOME$/Downloads/WorldEdit-master.zip!/WorldEdit-master/worldedit-core/src/main/java" />
+          <root url="jar://$USER_HOME$/Downloads/WorldEdit-master.zip!/WorldEdit-master/worldedit-core/src/test/java" />
+          <root url="jar://$USER_HOME$/Downloads/WorldEdit-master.zip!/WorldEdit-master/worldedit-forge/src/main/java" />
+          <root url="jar://$USER_HOME$/Downloads/WorldEdit-master.zip!/WorldEdit-master/worldedit-sponge/src/main/java" />
+        </SOURCES>
+      </library>
+    </orderEntry>
+    <orderEntry type="module-library">
+      <library>
+        <CLASSES>
+          <root url="jar://E:/MinecraftServer/plugins/worldedit-bukkit-7.0.0-beta-04.jar!/" />
+        </CLASSES>
+        <JAVADOC />
+        <SOURCES />
+      </library>
+    </orderEntry>
+  </component>
+</module>

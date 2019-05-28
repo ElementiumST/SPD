@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<component inherit-compiler-output="true" inheritJdk="true">
+	<output-test url="file://$MODULE_DIR$/classes/test/SPD"/>
+	<exclude-output/>
+	<contentEntry url="file://$MODULE_DIR$"/>
+	<lib name="spigot-1.13.2.jar" scope="COMPILE">
+		<srcroot url="jar://E:/MinecraftServer/spigot-1.13.2.jar!/"/>
+	</lib>
+	<lib name="C:\Users\STARK\Downloads\WorldEdit-master.zip" scope="COMPILE">
+		<srcroot url="jar://$USER_HOME$/Downloads/WorldEdit-master.zip!/WorldEdit-master/worldedit-bukkit/src/main/java"/>
+		<srcroot url="jar://$USER_HOME$/Downloads/WorldEdit-master.zip!/WorldEdit-master/worldedit-bukkit/src/test/java"/>
+		<srcroot url="jar://$USER_HOME$/Downloads/WorldEdit-master.zip!/WorldEdit-master/worldedit-core/src/legacy/java"/>
+		<srcroot url="jar://$USER_HOME$/Downloads/WorldEdit-master.zip!/WorldEdit-master/worldedit-core/src/main/java"/>
+		<srcroot url="jar://$USER_HOME$/Downloads/WorldEdit-master.zip!/WorldEdit-master/worldedit-core/src/test/java"/>
+		<srcroot url="jar://$USER_HOME$/Downloads/WorldEdit-master.zip!/WorldEdit-master/worldedit-forge/src/main/java"/>
+		<srcroot url="jar://$USER_HOME$/Downloads/WorldEdit-master.zip!/WorldEdit-master/worldedit-sponge/src/main/java"/>
+	</lib>
+</component>
