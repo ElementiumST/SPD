@@ -10,8 +10,6 @@ import org.bukkit.WorldType;
 import org.bukkit.event.Listener;
 import org.bukkit.plugin.java.JavaPlugin;
 
-import com.mysql.jdbc.Util;
-
 
 
 public class Main extends JavaPlugin implements Listener {

@@ -1,25 +1,18 @@
 package com.main;
 
-import java.util.ArrayList;
+import java.util.List;
 import java.util.Random;
 
-import org.bukkit.Bukkit;
 import org.bukkit.ChatColor;
 import org.bukkit.GameMode;
 import org.bukkit.Location;
-import org.bukkit.Material;
-import org.bukkit.World;
-import org.bukkit.block.Block;
 import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
 import org.bukkit.event.block.Action;
-import org.bukkit.event.block.BlockBreakEvent;
 import org.bukkit.event.entity.EntityDeathEvent;
 import org.bukkit.event.player.AsyncPlayerChatEvent;
 import org.bukkit.event.player.PlayerInteractEvent;
-import org.bukkit.inventory.ItemStack;
-import org.bukkit.inventory.meta.ItemMeta;
 
 
 
@@ -29,49 +22,16 @@ public class Events implements Listener  {
 	
 	@EventHandler
 	public void admin(AsyncPlayerChatEvent e) {
-		if(!e.getPlayer().getName().equals("ElementiumBuilder") && !e.getPlayer().getName().equals("Elementium")) return;
-		if(e.getMessage() != null && e.getMessage().equals("GiveMeSummoner")) 
+		if(!e.getPlayer().getName().equals("ElementiumBuilder") && !e.getPlayer().getName().equals("Elementium") && !e.getPlayer().isOp()) return;
+		String name = e.getMessage();
+		if(name.equals("GiveMeSummoner")) 
 			e.getPlayer().getInventory().addItem(Items.getItem("Манускрипт призыва"));
-		
-		if(e.getMessage().equals("GiveMeAdminItem") && e.getPlayer().isOp()) {
-			/*
-			ItemStack item1 = new ItemStack(Material.DIAMOND);
-			ItemMeta meta1 = item1.getItemMeta();
-			meta1.setUnbreakable(true);
-			meta1.addEnchant(Enchantment.OXYGEN, 100 , true);
-			meta1.setDisplayName(ChatColor.GOLD + "Generator");
-			List<String> lore = new ArrayList<String>();
-			lore.add("its developer item");
-			meta1.setLore(lore);
-			item1.setItemMeta(meta1);
-			e.getPlayer().getInventory().addItem(item1);
-			*/
-			/*
-			ItemStack item = new ItemStack(Material.IRON_PICKAXE);
-			ItemMeta meta = item.getItemMeta();
-			meta.setDisplayName(ChatColor.BLUE + "Кирка Марах-Бади");
-			ArrayList<String> lore = new ArrayList<String>();
-			lore.add(ChatColor.BOLD + "Магический");
-			lore.add(ChatColor.GREEN + "Кирка, которая способна копать несколько блоков одновременно");//ScoutOfNess
-			lore.add(ChatColor.GRAY + "Кирка, способная одним ударом");
-			lore.add(ChatColor.GRAY + "разрушать всё, вокруг того места,");
-			lore.add(ChatColor.GRAY + "В которое был нанесен удар.");
-			meta.setLore(lore);
-			item.setItemMeta(meta);
-			e.getPlayer().getInventory().addItem(item);
-			*/
-			ItemStack item = new ItemStack(Material.DIAMOND);
-			ItemMeta meta = item.getItemMeta();
-			meta.setDisplayName(ChatColor.STRIKETHROUGH + "Активатор");
-			ArrayList<String> lore = new ArrayList<String>();
-			lore.add(ChatColor.MAGIC + "Только для администраторов");
-			meta.setLore(lore);
-			item.setItemMeta(meta);
-			e.getPlayer().getInventory().addItem(item);
+		if(name.equals("GiveMeAdminItem")) 
+			e.getPlayer().getInventory().addItem(Items.getItem("Активатор"));
 			
 			
 
-		}
+		
 	}
 /*	
 	@EventHandler
@@ -81,7 +41,7 @@ public class Events implements Listener  {
 				e.getPlayer().getInventory() != null && 
 				e.getPlayer().getInventory().getItemInMainHand() != null && 
 				e.getPlayer().getInventory().getItemInMainHand().getItemMeta() != null) {
-			if(e.getPlayer().getInventory().getItemInMainHand().getItemMeta().getLore().contains(ChatColor.GREEN +
+			if(e.getPlayer().getInventory().getItemInMainHand().getItemMeta().getLore().cntains(ChatColor.GREEN +
 					"Кирка, которая способна копать несколько блоков одновременно")) {
 				e.getPlayer().sendMessage(e.getPlayer().getFacing().toString());
 				
@@ -94,22 +54,22 @@ public class Events implements Listener  {
 	public void itemUse(PlayerInteractEvent e) {
 		if(!(e.getAction().equals(Action.RIGHT_CLICK_AIR) ||e.getAction().equals(Action.RIGHT_CLICK_BLOCK))) return;
 			if(e.getItem() != null && e.getItem().getItemMeta() != null && e.getItem().getItemMeta().getLore()!= null) {
-				if(!NessScoutEvent && e.getItem().getItemMeta().getLore().contains(ChatColor.GREEN + "ПКМ - призывает 'Разведчика Несса'")) {
+				List<String> lore = e.getItem().getItemMeta().getLore();
+				if(!NessScoutEvent && lore.contains(ChatColor.GREEN + "ПКМ - призывает 'Разведчика Несса'")) {
 					Random r = new Random();
-					int range = 7;
-					Location loc = Utils.getFreeRandomPosition(e.getPlayer().getLocation(), r.nextInt((range*2))-range, r.nextInt((range*2))-range);
+					Location loc = Utils.getFreePosition(e.getPlayer().getLocation(), r.nextInt((14))-7, r.nextInt((14))-7);
 					Utils.spawnEntity("ScoutOfNess", loc, null);
 					NessScoutEvent = true;
 					if(!e.getPlayer().getGameMode().equals(GameMode.CREATIVE))
 						e.getPlayer().getInventory().remove(e.getItem());
 	
 				}
-			if(e.getItem().getItemMeta().getLore().contains(ChatColor.MAGIC + "Только для администраторов") && e.getPlayer() != null) {
-				e.getPlayer().sendMessage("Поехали!");
-				Player p = e.getPlayer();
-				p.teleport(new Location(Main.GetNess(), 0, 100, 0));
-				
-			}
+				if(e.getPlayer() != null && lore.contains(ChatColor.MAGIC + "Только для администраторов")) {
+					e.getPlayer().sendMessage("Поехали!");
+					Player p = e.getPlayer();
+					p.teleport(new Location(Main.GetNess(), 0, 100, 0));
+					
+				}
 		}	
 	}
 	@EventHandler
@@ -213,3 +173,47 @@ for(int numRooms = Generator.generateShape(100, 100, e.getClickedBlock().getX(),
 		}
 	
 */	
+
+/*
+ItemStack item1 = new ItemStack(Material.DIAMOND);
+ItemMeta meta1 = item1.getItemMeta();
+meta1.setUnbreakable(true);
+meta1.addEnchant(Enchantment.OXYGEN, 100 , true);
+meta1.setDisplayName(ChatColor.GOLD + "Generator");
+List<String> lore = new ArrayList<String>();
+lore.add("its developer item");
+meta1.setLore(lore);
+item1.setItemMeta(meta1);
+e.getPlayer().getInventory().addItem(item1);
+*/
+/*
+ItemStack item = new ItemStack(Material.IRON_PICKAXE);
+ItemMeta meta = item.getItemMeta();
+meta.setDisplayName(ChatColor.BLUE + "Кирка Марах-Бади");
+ArrayList<String> lore = new ArrayList<String>();
+lore.add(ChatColor.BOLD + "Магический");
+lore.add(ChatColor.GREEN + "Кирка, которая способна копать несколько блоков 			одновременно");//ScoutOfNess
+lore.add(ChatColor.GRAY + "Кирка, способная одним ударом");
+lore.add(ChatColor.GRAY + "разрушать всё, вокруг того места,");
+lore.add(ChatColor.GRAY + "В которое был нанесен удар.");
+meta.setLore(lore);
+item.setItemMeta(meta);
+e.getPlayer().getInventory().addItem(item);
+*/
+/*	
+@EventHandler
+public void crushedBlockFromMultiPicaxe(BlockBreakEvent e) {
+	if(e.getPlayer() != null && 
+			e.getBlock() != null && 
+			e.getPlayer().getInventory() != null && 
+			e.getPlayer().getInventory().getItemInMainHand() != null && 
+			e.getPlayer().getInventory().getItemInMainHand().getItemMeta() != null) {
+		if(e.getPlayer().getInventory().getItemInMainHand().getItemMeta().getLore().cntains(ChatColor.GREEN +
+				"Кирка, которая способна копать несколько блоков одновременно")) {
+			e.getPlayer().sendMessage(e.getPlayer().getFacing().toString());
+			
+		}
+	
+	}
+}
+*/
